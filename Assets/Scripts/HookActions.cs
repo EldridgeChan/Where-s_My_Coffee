@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HookActions : MonoBehaviour
 {
-    const float hookSpeed = 100f;
-    const int maxRopes = 50;
+    const float hookSpeed = 120f;
+    const int maxRopes = 15;
     private Vector2 travelDir;
     private HingeJoint2D hookJoint;
     private Rigidbody2D lastRopeRig;
