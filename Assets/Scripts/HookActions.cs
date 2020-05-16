@@ -5,7 +5,7 @@ using UnityEngine;
 public class HookActions : MonoBehaviour
 {
     const float hookSpeed = 120f;
-    const int maxRopes = 15;
+    const int maxRopes = 25;
     private Vector2 travelDir;
     private HingeJoint2D hookJoint;
     private Rigidbody2D lastRopeRig;
@@ -29,7 +29,7 @@ public class HookActions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Platform" && ropes.Count < 50 && !interaction.isHooked && !interaction.isHookRevoking)
+        if (collision.gameObject.tag == "Platform" && ropes.Count < maxRopes && !interaction.isHooked && !interaction.isHookRevoking)
         {
             interaction.isHooked = true;
             hookRig.constraints = RigidbodyConstraints2D.None;
@@ -54,7 +54,7 @@ public class HookActions : MonoBehaviour
         if (interaction.isHookRevoking)
         {
             revokeRope();
-        } else if (ropes.Count < 50 && !interaction.isHooked) {
+        } else if (ropes.Count < maxRopes && !interaction.isHooked) {
             travel();
             addrope();
         }
@@ -73,7 +73,7 @@ public class HookActions : MonoBehaviour
             ropes.Add(currRopeRig = Instantiate(interaction.RopePrefabs, nextRopePosition(), lastRopeRig.transform.rotation).GetComponent<Rigidbody2D>());
             currRopeRig.GetComponent<HingeJoint2D>().connectedBody = lastRopeRig;
             lastRopeRig = currRopeRig;
-            if (ropes.Count == 50)
+            if (ropes.Count == maxRopes)
             {
                 interaction.PlayerJoint.enabled = true;
                 interaction.PlayerJoint.connectedBody = lastRopeRig;
@@ -112,14 +112,6 @@ public class HookActions : MonoBehaviour
 
     private void destroyHook()
     {
-        /*
-        foreach (Rigidbody2D rope in ropes)
-        {
-            rope.MovePosition(interaction.Player.transform.position);
-        }
-        ropes.Clear();
-        Destroy(gameObject);
-        */
         if (ropes.Count > 0)
         {
             for (int i = ropes.Count - 1; i >= 0; i--)
