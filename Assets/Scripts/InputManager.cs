@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public HookActions currHook;
+    public HookActions currHook;    //Current Hook is exsist
 
     [SerializeField]
-    private GameObject hook;
-    [SerializeField]
-    private InteractionManager interaction;
-    [SerializeField]
-    private Transform player;
+    private InteractionManager interaction; //interaction manager script
 
     // Start is called before the first frame update
     void Start()
@@ -22,23 +18,24 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        throwHook();
+        throwHook();    //Check mouse input
 
     }
 
     private void throwHook()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))    //When left click pressed
         {
-            if (currHook == null)
+            if (currHook == null)   //If no hook already thorwn
             {
                 interaction.isHookRevoking = false;
-                currHook = Instantiate(hook, player.position + Vector3.up, Quaternion.FromToRotation(Vector2.up, Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10) - player.position)).GetComponent<HookActions>();
+                //Creat a new Hook gameObject
+                currHook = Instantiate(interaction.HookPrefabs, interaction.Player.transform.position + Vector3.up, Quaternion.FromToRotation(Vector2.up, Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10) - interaction.Player.transform.position)).GetComponent<HookActions>();
             }
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))  //When left click released
         {
-            interaction.isHookRevoking = true;
+            interaction.isHookRevoking = true;  //change state
         }
     }
 }

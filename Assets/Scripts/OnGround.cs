@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnGround : MonoBehaviour
 {
-    private bool isGrounded = false;
+    private bool isGrounded = false;  //a bool to indicate if the character is on ground
     public bool IsGrounded
     {
         get { return isGrounded; }
