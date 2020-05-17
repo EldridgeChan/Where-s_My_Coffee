@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    const float maxSpeed = 25f; //Where walk speed cap at
+    const float maxSpeed = 50f; //Where walk speed cap at
     const float acceleration = 120f; //acceleration per frame 
     const float stopMultifier = 5.5f; //How quick it stop when not pressing left or right
     //above value affect walking
-    const float jumpForce = 2000f; //velocity of initial jump
-    const float upGravityMultifier = 13f; //nagative acceleration when release space
-    const float downGravityMultifier = 4f; //acceleration when falling
+    const float jumpForce = 1900f; //velocity of initial jump
+    const float upGravityMultifier = 14f; //nagative acceleration when release space
+    const float downGravityMultifier = 4.5f; //acceleration when falling
     //above value affect jumping
     private Rigidbody2D rig;  //character's rigidbody
     private OnGround onGround; //On ground collider scrips 
