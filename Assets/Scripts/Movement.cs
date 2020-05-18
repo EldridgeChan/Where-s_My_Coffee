@@ -79,7 +79,7 @@ public class Movement : MonoBehaviour
         {
             rig.AddForce(Vector2.up * downGravityMultifier * Physics2D.gravity);
         }
-        else if (rig.velocity.y > 0 && !Input.GetButton("Jump") && !interaction.isHooked)  //caontrolable hight of jumping for player
+        else if (rig.velocity.y > 0 && !Input.GetButton("Jump") && !interaction.isHooked )  //caontrolable hight of jumping for player
         {
             rig.AddForce(Vector2.up * upGravityMultifier * Physics2D.gravity);
         }
