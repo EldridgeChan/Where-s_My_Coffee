@@ -1367,9 +1367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHook: {fileID: 0}
-  hook: {fileID: 3573981322378805277, guid: 71b06d8d9311a9f4f97eb388c7e4aa01, type: 3}
   interaction: {fileID: 1793700835}
-  player: {fileID: 712908715}
 --- !u!1001 &1825686590
 PrefabInstance:
   m_ObjectHideFlags: 0
