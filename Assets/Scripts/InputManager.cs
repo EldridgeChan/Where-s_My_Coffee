@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    private float control;
+    public float Control { get { return control; } }
+
     public HookActions currHook;    //Current Hook is exsist
 
     [SerializeField]
     private InteractionManager interaction; //interaction manager script
+    [SerializeField]
+    private Movement playersMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +23,9 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        control = Input.GetAxisRaw("Horizontal");
         throwHook();    //Check mouse input
+        jump();
 
     }
 
@@ -36,6 +43,14 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))  //When left click released
         {
             interaction.isHookRevoking = true;  //change state
+        }
+    }
+
+    private void jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            playersMovement.jump();
         }
     }
 }
