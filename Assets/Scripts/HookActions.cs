@@ -51,16 +51,23 @@ public class HookActions : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (interaction.isHookRevoking) //if whook is revoking
         {
             revokeRope();
-        } else if (ropes.Count < maxRopes && !interaction.isHooked) {   //the hook before revoke
+        }
+        else if (ropes.Count < maxRopes && !interaction.isHooked)
+        {   //the hook before revoke
             travel();
             addrope();
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     private void travel()   //make hook move
