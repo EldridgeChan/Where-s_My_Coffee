@@ -6,6 +6,7 @@ public class InteractionManager : MonoBehaviour
 {
     public bool isHooked = false;   //state indicate if the hook is hooked to the platform
     public bool isHookRevoking = true;  //state indicate if the hook is revoking and revoked
+    public bool isHookStoped = true;
 
     [SerializeField]
     private GameObject player; 
@@ -37,11 +38,5 @@ public class InteractionManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-    //A method to pass the collision between player and rope to the hookaction script
-    public void destroyRopes(Collider2D collision)  
-    {
-        inputMan.currHook.destroyRope(collision);
     }
 }

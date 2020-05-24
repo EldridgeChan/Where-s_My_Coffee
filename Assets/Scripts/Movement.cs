@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     const float acceleration = maxSpeed * 0.3f; //acceleration per frame 
     const float stopDeceleration = maxSpeed * 0.5f; //How quick it stop when not pressing left or right
     //above value affect walking
-    const float jumpForce = 1900f; //velocity of initial jump
+    const float jumpForce = 2500f; //velocity of initial jump
     const float upGravityMultifier = 30f; //nagative acceleration when release space
     const float downGravityMultifier = 6f; //acceleration when falling
     //above value affect jumping
@@ -29,14 +29,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Rope" && interaction.isHookRevoking) //When revoking the hook and hit the rope
-        {
-            interaction.destroyRopes(collision);
-        }
     }
 
     private void FixedUpdate()
@@ -75,7 +67,7 @@ public class Movement : MonoBehaviour
         {
             rig.AddForce(Vector2.up * downGravityMultifier * Physics2D.gravity);
         }
-        else if (rig.velocity.y > 0 && !Input.GetButton("Jump") && !interaction.isHooked)  //caontrolable hight of jumping for player
+        else if (rig.velocity.y > 0 && !Input.GetButton("Jump") && !Input.GetKey(KeyCode.UpArrow) && !interaction.isHooked)  //caontrolable hight of jumping for player
         {
             rig.AddForce(Vector2.up * upGravityMultifier * Physics2D.gravity);
         }

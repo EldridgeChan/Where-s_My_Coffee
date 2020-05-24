@@ -36,6 +36,7 @@ public class InputManager : MonoBehaviour
             if (currHook == null)   //If no hook already thorwn
             {
                 interaction.isHookRevoking = false;
+                interaction.isHookStoped = false;
                 //Creat a new Hook gameObject
                 currHook = Instantiate(interaction.HookPrefabs, interaction.Player.transform.position + Vector3.up, Quaternion.FromToRotation(Vector2.up, Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10) - interaction.Player.transform.position)).GetComponent<HookActions>();
             }
@@ -48,7 +49,7 @@ public class InputManager : MonoBehaviour
 
     private void jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow))
         {
             playersMovement.jump();
         }
