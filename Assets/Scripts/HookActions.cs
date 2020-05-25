@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class HookActions : MonoBehaviour
 {
-    const float hookSpeed = 120f;  //How fast the hook flying off from the character
+    const float hookSpeed = 150f;  //How fast the hook flying off from the character
     const int maxRopes = 25;   //How long the rope can be
+    const int revokeSpeed = 2;
     //Values above control the hook
     private Vector2 travelDir;  //A variable to store what direction should the hook travel
     private HingeJoint2D hookJoint;  //The HingeJont of Hook object
@@ -13,10 +14,12 @@ public class HookActions : MonoBehaviour
     private Rigidbody2D hookRig;  //the irgidbocy of the Hook object
     private List<Rigidbody2D> ropes = new List<Rigidbody2D>();  // a list to store all the rope segment
     private InteractionManager interaction;   //interaction manager
+    private LineRenderer hookLineRen;
 
     private void Awake()
     {
         interaction = GameObject.FindWithTag("GameManager").GetComponent<InteractionManager>();
+        hookLineRen = GetComponent<LineRenderer>();
         hookJoint = GetComponent<HingeJoint2D>();
         lastRopeRig = GetComponent<Rigidbody2D>();
         hookRig = lastRopeRig;
@@ -31,108 +34,115 @@ public class HookActions : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //When the Hook is traveling and hit a platform to attach to the platform
-        if (collision.gameObject.tag == "Platform" && ropes.Count < maxRopes && !interaction.isHooked && !interaction.isHookRevoking)
+        if (collision.gameObject.tag == "Platform" && !interaction.isHooked && !interaction.isHookRevoking)
         {
             interaction.isHooked = true;    //change staus
-            hookRig.constraints = RigidbodyConstraints2D.None;  //enable the hook to rotate
+            interaction.isHookStoped = true;
             hookJoint.enabled = true;   //activate the Joint component
             hookJoint.connectedBody = collision.GetComponent<Rigidbody2D>();    //get the hook attach to the platform
-            interaction.PlayerJoint.enabled = true; //activate the joint component of player
-            interaction.PlayerJoint.connectedBody = lastRopeRig;    //make player's joint attach to the last rope
+            if (ropes.Count == 0)
+            {
+                attachPlayer();
+            }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void FixedUpdate()
     {
-        // When revoking the hook and hit with player
-        if (collision.gameObject.tag == "Player" && interaction.isHookRevoking)
+        if (interaction.isHookRevoking) //if whook is revoking
         {
-            destroyHook();
+            revokingRope();
+        }
+        else if (Vector2.Distance(transform.position, interaction.Player.transform.position) < maxRopes && !interaction.isHookStoped)
+        {   //the hook before revoke
+            travel();
+        } else if (ropes.Count == 0)
+        {
+            attachPlayer();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (interaction.isHookRevoking) //if whook is revoking
-        {
-            revokeRope();
-        } else if (ropes.Count < maxRopes && !interaction.isHooked) {   //the hook before revoke
-            travel();
-            addrope();
-        }
+        updateLineRenPos();
     }
 
     private void travel()   //make hook move
-    {        
+    {
         hookRig.velocity = travelDir * hookSpeed;
     }
 
-    private void addrope()  //add rope sement between hook and character
+    private void attachPlayer()
     {
-        //when more than a unit between player and last rope segment
-        while (Vector3.Distance(lastRopeRig.transform.position, interaction.Player.transform.position) > 1f)    
+        interaction.isHookStoped = true;
+        hookRig.velocity = Vector2.zero;
+        hookRig.constraints = RigidbodyConstraints2D.None;
+
+        int ropeSegs = Mathf.RoundToInt(Vector2.Distance(transform.position, interaction.Player.transform.position));
+        Rigidbody2D currRopeRig;
+        for (int i = 1; i < ropeSegs; i++)
         {
-            Rigidbody2D currRopeRig;
             //create rope segment object and add it into the list
-            ropes.Add(currRopeRig = Instantiate(interaction.RopePrefabs, nextRopePosition(), lastRopeRig.transform.rotation).GetComponent<Rigidbody2D>());
+            ropes.Add(currRopeRig = Instantiate(interaction.RopePrefabs, nextRopePosition(i, ropeSegs), Quaternion.identity).GetComponent<Rigidbody2D>());
             currRopeRig.GetComponent<HingeJoint2D>().connectedBody = lastRopeRig;   //attach the rope to the previout rope or hook
             lastRopeRig = currRopeRig;
-            if (ropes.Count == maxRopes)    //last rope segment have been created
-            {
-                interaction.PlayerJoint.enabled = true; //activate player's joint coponent
-                interaction.PlayerJoint.connectedBody = lastRopeRig;    //attach the player to the last rope segment
-            }
+            hookLineRen.positionCount++;
+            hookLineRen.SetPosition(hookLineRen.positionCount - 2, ropes[ropes.Count - 1].transform.position);
         }
+        interaction.PlayerJoint.enabled = true; //activate player's joint coponent
+        interaction.PlayerJoint.connectedBody = lastRopeRig;    //attach the player to the last rope segment
     }
 
-    public void revokeRope()    //call when the player release mouse left click
+    private void updateLineRenPos()
     {
+        hookLineRen.SetPosition(0, transform.position);
+        for (int i = 0; i < ropes.Count; i++)
+        {
+            hookLineRen.SetPosition(i + 1, ropes[i].transform.position);
+        }
+        hookLineRen.SetPosition(hookLineRen.positionCount - 1, interaction.Player.transform.position);
+    }
 
-        if (interaction.isHooked)
+    private void revokingRope()
+    {
+        if (interaction.isHookStoped || interaction.isHooked)
         {
-            //Makes player to move on ground state (caped speed) and change the staus back
-            interaction.isHooked = false;   
-        }
-        if (interaction.PlayerJoint.enabled)
-        {
-            //deattach the player to the rope
+            interaction.isHooked = false;
+            interaction.isHookStoped = false;
+            hookJoint.connectedBody = null;
+            hookJoint.enabled = false;
             interaction.PlayerJoint.connectedBody = null;
-            interaction.PlayerJoint.enabled = false; //Deactivate the joint componet so that the player can walk 
-            hookJoint.enabled = false;  //Deattach the hook from platform
+            interaction.PlayerJoint.enabled = false;
         }
-        
-        if (ropes.Count > 0)
+
+        for (int i = 0; i < ropes.Count; i++)
         {
-            //make the last rope move toward player
-            ropes[ropes.Count - 1].MovePosition(interaction.Player.transform.position); 
+            ropes[i].transform.position = Vector3.Lerp(ropes[i].transform.position, Vector3.Lerp(transform.position, interaction.Player.transform.position, (float)i / ropes.Count), 0.5f);
+        }
+        if (ropes.Count >= 2 * revokeSpeed) {
+            transform.position = ropes[revokeSpeed - 1].transform.position;
+            for (int i = 0; i < ropes.Count - revokeSpeed; i++)
+            {
+                ropes[i].transform.position = ropes[i + revokeSpeed].transform.position;
+            }
+            hookLineRen.positionCount -= revokeSpeed;
+            for (int i = 0; i < revokeSpeed; i++) {
+                Rigidbody2D temp = ropes[ropes.Count - 1 - i];
+                ropes.RemoveAt(ropes.Count - 1 - i);
+                Destroy(temp.gameObject);
+            }
         } else
         {
-            //If the rope left, move hook toward player
-            hookRig.MovePosition(interaction.Player.transform.position);
-        }
-    }
-
-    public void destroyRope(Collider2D collision)   //called what the rope collide with player in Movement script
-    {
-        ropes.Remove(collision.GetComponent<Rigidbody2D>());    //remove rope segment from the list
-        Destroy(collision.gameObject);  //destroy rope segment object
-    }
-
-    private void destroyHook()  //called when the hook is revoking and hit player
-    {
-        if (ropes.Count > 0)
-        {
-            //destroy every rope segment which are left
-            //because the rope is referened by the list in this script if destriy this there will be no reference to the rope segment
             for (int i = ropes.Count - 1; i >= 0; i--)
             {
                 Rigidbody2D temp = ropes[i];
-                ropes.Remove(temp);
+                ropes.RemoveAt(i);
                 Destroy(temp.gameObject);
             }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);    //Destroy the Hook
+        updateLineRenPos();
     }
 
     private Vector2 travelDirection()   //return an unit vecter2 in the direction the hook should travel with its rotation
@@ -141,9 +151,8 @@ public class HookActions : MonoBehaviour
         return new Vector2(Mathf.Sin(theta), Mathf.Cos(theta));
     }
 
-    private Vector3 nextRopePosition () //return the position where the next rope should be instantialated with the lastroperig variable
+    private Vector3 nextRopePosition(int i, int maxRange)
     {
-        Vector3 temp = lastRopeRig.transform.position - interaction.Player.transform.position;
-        return lastRopeRig.transform.position - new Vector3(temp.x/temp.magnitude, temp.y/temp.magnitude, 0f);
+        return Vector3.Lerp(transform.position, interaction.Player.transform.position, (float)i / maxRange);
     }
 }

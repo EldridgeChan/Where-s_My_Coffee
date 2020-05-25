@@ -6,6 +6,9 @@ public class InteractionManager : MonoBehaviour
 {
     public bool isHooked = false;   //state indicate if the hook is hooked to the platform
     public bool isHookRevoking = true;  //state indicate if the hook is revoking and revoked
+    public bool isHookStoped = true;
+
+    private Vector3 initialPos;
 
     [SerializeField]
     private GameObject player; 
@@ -30,18 +33,20 @@ public class InteractionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        initialPos = Player.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        respawn();
     }
 
-    //A method to pass the collision between player and rope to the hookaction script
-    public void destroyRopes(Collider2D collision)  
+    private void respawn()
     {
-        inputMan.currHook.destroyRope(collision);
+        if (Player.transform.position.y < -20)
+        {
+            Player.transform.position = initialPos;
+        }
     }
 }
