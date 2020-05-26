@@ -7,6 +7,7 @@ public class InteractionManager : MonoBehaviour
     public bool isHooked = false;   //state indicate if the hook is hooked to the platform
     public bool isHookRevoking = true;  //state indicate if the hook is revoking and revoked
     public bool isHookStoped = true;
+    public bool isHookPulling = false;
 
     private Vector3 initialPos;
 
@@ -44,9 +45,9 @@ public class InteractionManager : MonoBehaviour
 
     private void respawn()
     {
-        if (Player.transform.position.y < -20)
+        /*if (Player.transform.position.y < -20)
         {
             Player.transform.position = initialPos;
-        }
+        }*/
     }
 }

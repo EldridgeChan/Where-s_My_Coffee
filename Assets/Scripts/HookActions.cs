@@ -5,7 +5,7 @@ using UnityEngine;
 public class HookActions : MonoBehaviour
 {
     const float hookSpeed = 150f;  //How fast the hook flying off from the character
-    const int maxRopes = 25;   //How long the rope can be
+    const int maxRopes = 20;   //How long the rope can be
     const int revokeSpeed = 2;
     //Values above control the hook
     private Vector2 travelDir;  //A variable to store what direction should the hook travel
@@ -52,6 +52,9 @@ public class HookActions : MonoBehaviour
         if (interaction.isHookRevoking) //if whook is revoking
         {
             revokingRope();
+        } else if (interaction.isHookPulling)
+        {
+            pullRopes();
         }
         else if (Vector2.Distance(transform.position, interaction.Player.transform.position) < maxRopes && !interaction.isHookStoped)
         {   //the hook before revoke
@@ -143,6 +146,11 @@ public class HookActions : MonoBehaviour
             Destroy(gameObject);
         }
         updateLineRenPos();
+    }
+
+    private void pullRopes()
+    {
+
     }
 
     private Vector2 travelDirection()   //return an unit vecter2 in the direction the hook should travel with its rotation

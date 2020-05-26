@@ -8,9 +8,9 @@ public class Movement : MonoBehaviour
     const float acceleration = maxSpeed * 0.3f; //acceleration per frame 
     const float stopDeceleration = maxSpeed * 0.5f; //How quick it stop when not pressing left or right
     //above value affect walking
-    const float jumpForce = 2500f; //velocity of initial jump
+    const float jumpForce = 2700f; //velocity of initial jump
     const float upGravityMultifier = 30f; //nagative acceleration when release space
-    const float downGravityMultifier = 8f; //acceleration when falling
+    const float downGravityMultifier = 10f; //acceleration when falling
     //above value affect jumping
 
     private Rigidbody2D rig;  //character's rigidbody
@@ -18,8 +18,6 @@ public class Movement : MonoBehaviour
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
-    [SerializeField]
-    private Animator animator;  //Animation animator
     [SerializeField]
     private SpriteRenderer playerSpriteRen; //SpriteRenderer of main character
     private void Awake()
@@ -44,7 +42,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        characterAnimation();
+
     }
 
     private void walking() //how the charater walk
@@ -75,19 +73,6 @@ public class Movement : MonoBehaviour
         else if (rig.velocity.y > 0 && !Input.GetButton("Jump") && !Input.GetKey(KeyCode.UpArrow) && !interaction.isHooked)  //caontrolable hight of jumping for player
         {
             rig.AddForce(Vector2.up * upGravityMultifier * Physics2D.gravity);
-        }
-    }
-
-    private void characterAnimation()
-    {
-        animator.SetFloat("Speed", Mathf.Abs(interaction.Inputman.Control));
-
-        if (interaction.Inputman.Control < 0)
-        {
-            playerSpriteRen.flipX = true;
-        } else if (interaction.Inputman.Control > 0)
-        {
-            playerSpriteRen.flipX = false;
         }
     }
 }
