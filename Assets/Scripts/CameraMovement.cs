@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    [SerializeField]
     private Transform player;
 
-    private void Awake()
-    {
-        player = GameObject.FindWithTag("Player").transform;
-    }
     // Start is called before the first frame update
     void Start()
     {

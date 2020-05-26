@@ -38,7 +38,7 @@ public class OnGround : MonoBehaviour
         
     }
 
-    public void jumping()
+    public void jump()
     {
         isGrounded = false;
     }
