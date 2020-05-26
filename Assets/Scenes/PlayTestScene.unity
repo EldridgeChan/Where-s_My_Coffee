@@ -301,6 +301,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &152827023
+
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
