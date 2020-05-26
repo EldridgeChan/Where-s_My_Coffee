@@ -13,14 +13,14 @@ public class Movement : MonoBehaviour
     const float downGravityMultifier = 6f; //acceleration when falling
     //above value affect jumping
 
-    float horizontalMove = 0f;
+    private float horizontalMove = 0f;
     private Rigidbody2D rig;  //character's rigidbody
     private OnGround onGround; //On ground collider scrips 
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
-
-    public Animator animator; // Animation animator
+    [SerializeField]
+    private Animator animator; // Animation animator
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
