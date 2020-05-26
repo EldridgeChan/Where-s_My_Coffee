@@ -10,17 +10,18 @@ public class Movement : MonoBehaviour
     //above value affect walking
     const float jumpForce = 2500f; //velocity of initial jump
     const float upGravityMultifier = 30f; //nagative acceleration when release space
-    const float downGravityMultifier = 6f; //acceleration when falling
+    const float downGravityMultifier = 8f; //acceleration when falling
     //above value affect jumping
 
-    private float horizontalMove = 0f;
     private Rigidbody2D rig;  //character's rigidbody
     private OnGround onGround; //On ground collider scrips 
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
     [SerializeField]
-    private Animator animator; // Animation animator
+    private Animator animator;  //Animation animator
+    [SerializeField]
+    private SpriteRenderer playerSpriteRen; //SpriteRenderer of main character
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -43,8 +44,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * maxSpeed;
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        animation();
     }
 
     private void walking() //how the charater walk
@@ -75,6 +75,19 @@ public class Movement : MonoBehaviour
         else if (rig.velocity.y > 0 && !Input.GetButton("Jump") && !Input.GetKey(KeyCode.UpArrow) && !interaction.isHooked)  //caontrolable hight of jumping for player
         {
             rig.AddForce(Vector2.up * upGravityMultifier * Physics2D.gravity);
+        }
+    }
+
+    private void animation()
+    {
+        animator.SetFloat("Speed", Mathf.Abs(interaction.Inputman.Control));
+
+        if (interaction.Inputman.Control < 0)
+        {
+            playerSpriteRen.flipX = true;
+        } else if (interaction.Inputman.Control > 0)
+        {
+            playerSpriteRen.flipX = false;
         }
     }
 }
