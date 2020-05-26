@@ -44,7 +44,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animation();
+        characterAnimation();
     }
 
     private void walking() //how the charater walk
@@ -78,7 +78,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void animation()
+    private void characterAnimation()
     {
         animator.SetFloat("Speed", Mathf.Abs(interaction.Inputman.Control));
 
