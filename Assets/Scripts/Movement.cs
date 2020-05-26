@@ -12,12 +12,15 @@ public class Movement : MonoBehaviour
     const float upGravityMultifier = 30f; //nagative acceleration when release space
     const float downGravityMultifier = 6f; //acceleration when falling
     //above value affect jumping
+
+    float horizontalMove = 0f;
     private Rigidbody2D rig;  //character's rigidbody
     private OnGround onGround; //On ground collider scrips 
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
 
+    public Animator animator; // Animation animator
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -40,6 +43,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        horizontalMove = Input.GetAxisRaw("Horizontal") * maxSpeed;
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
     }
 
     private void walking() //how the charater walk
