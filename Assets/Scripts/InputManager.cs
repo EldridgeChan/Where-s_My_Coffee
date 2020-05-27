@@ -45,6 +45,14 @@ public class InputManager : MonoBehaviour
         {
             interaction.isHookRevoking = true;  //change state
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            interaction.isHookPulling = true;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            interaction.isHookPulling = false;
+        }
     }
 
     private void jump()
