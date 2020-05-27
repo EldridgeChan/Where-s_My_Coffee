@@ -13,6 +13,7 @@ TagManager:
   - LevelThreeButton
   - LevelFourButton
   - TitleSceneButton
+  - UnHookable
   layers:
   - Default
   - TransparentFX

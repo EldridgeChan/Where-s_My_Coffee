@@ -8,12 +8,12 @@ public class GameManager
 
     public enum scene
     {
+        TitleScene,
         tutLevel,
         levelOne,
         levelTwo,
         levelThree,
-        levelFour,
-        TitleScene
+        levelFour
     }
 
 
