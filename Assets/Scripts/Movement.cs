@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     const float stopDeceleration = maxSpeed * 0.2f; //How quick it stop when not pressing left or right
     //above value affect walking
     const float jumpForce = 2700f; //velocity of initial jump
+    const float fallSpeedCap = 180f;
     const float jumpGravityMultifier = 0.5f;
     const float upGravityMultifier = 0.1f; //nagative acceleration when release space
     const float downGravityMultifier = 0.2f; //acceleration when falling
@@ -85,18 +86,15 @@ public class Movement : MonoBehaviour
             {
                 interaction.isJumped = false;
             }
-            //rig.AddForce(Vector2.up * downGravityMultifier * Physics2D.gravity);
             rig.velocity += Vector2.up * downGravityMultifier * Physics2D.gravity;
-            rig.velocity = new Vector2(rig.velocity.x, Mathf.Clamp(rig.velocity.y, -200f, 200f));
+            rig.velocity = new Vector2(rig.velocity.x, Mathf.Clamp(rig.velocity.y, -fallSpeedCap, fallSpeedCap));
         }
         else if (rig.velocity.y > 0 && !Input.GetButton("Jump") && !Input.GetKey(KeyCode.UpArrow) && !interaction.isHooked && interaction.isJumped)  //caontrolable hight of jumping for player
         {
-            //rig.AddForce(Vector2.up * upGravityMultifier * Physics2D.gravity);
             rig.velocity += Vector2.up * jumpGravityMultifier * Physics2D.gravity;
         }
         else if (rig.velocity.y != 0 && !interaction.isJumped) 
         {
-            //rig.AddForce(Vector2.up * upGravityMultifier * Physics2D.gravity);
             rig.velocity += Vector2.up * upGravityMultifier * Physics2D.gravity;
         }
     }

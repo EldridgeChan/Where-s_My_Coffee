@@ -1613,6 +1613,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63be44eef7cb47c429b710fbcf837437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &2059668716 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6734823589441772131, guid: 284e006779e30a44788dd274755791a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6734823589605611151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2059668718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6734823589441772129, guid: 284e006779e30a44788dd274755791a4,
@@ -1901,6 +1907,11 @@ PrefabInstance:
       propertyPath: playerJoint
       value: 
       objectReference: {fileID: 2059668713}
+    - target: {fileID: 6479753127604876454, guid: 4d1125984846cdf439384133d244d8a0,
+        type: 3}
+      propertyPath: playerRig
+      value: 
+      objectReference: {fileID: 2059668716}
     - target: {fileID: 6479753127604876455, guid: 4d1125984846cdf439384133d244d8a0,
         type: 3}
       propertyPath: playersMovement
