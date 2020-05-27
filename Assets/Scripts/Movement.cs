@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     const float stopDeceleration = maxSpeed * 0.2f; //How quick it stop when not pressing left or right
     //above value affect walking
     const float jumpForce = 2700f; //velocity of initial jump
-    const float fallSpeedCap = 180f;
+    const float fallSpeedCap = 170f;
     const float jumpGravityMultifier = 0.5f;
     const float upGravityMultifier = 0.1f; //nagative acceleration when release space
     const float downGravityMultifier = 0.2f; //acceleration when falling
