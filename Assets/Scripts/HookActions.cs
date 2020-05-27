@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HookActions : MonoBehaviour
 {
+    const float pullForce = 2000f;
     const float hookSpeed = 150f;  //How fast the hook flying off from the character
     const int maxRopes = 20;   //How long the rope can be
     const int revokeSpeed = 2;
@@ -13,6 +14,7 @@ public class HookActions : MonoBehaviour
     private Rigidbody2D lastRopeRig;  //The rigidbody of the last rope segment object
     private Rigidbody2D hookRig;  //the irgidbocy of the Hook object
     private List<Rigidbody2D> ropes = new List<Rigidbody2D>();  // a list to store all the rope segment
+    private List<HingeJoint2D> ropesJoint = new List<HingeJoint2D>();
     private InteractionManager interaction;   //interaction manager
     private LineRenderer hookLineRen;
 
@@ -52,7 +54,7 @@ public class HookActions : MonoBehaviour
         if (interaction.isHookRevoking) //if whook is revoking
         {
             revokingRope();
-        } else if (interaction.isHookPulling)
+        } else if (interaction.isHookPulling && interaction.isHooked)
         {
             pullRopes();
         }
@@ -88,7 +90,8 @@ public class HookActions : MonoBehaviour
         {
             //create rope segment object and add it into the list
             ropes.Add(currRopeRig = Instantiate(interaction.RopePrefabs, nextRopePosition(i, ropeSegs), Quaternion.identity).GetComponent<Rigidbody2D>());
-            currRopeRig.GetComponent<HingeJoint2D>().connectedBody = lastRopeRig;   //attach the rope to the previout rope or hook
+            ropesJoint.Add(currRopeRig.GetComponent<HingeJoint2D>());
+            ropesJoint[ropesJoint.Count - 1].connectedBody = lastRopeRig;   //attach the rope to the previout rope or hook
             lastRopeRig = currRopeRig;
             hookLineRen.positionCount++;
             hookLineRen.SetPosition(hookLineRen.positionCount - 2, ropes[ropes.Count - 1].transform.position);
@@ -133,6 +136,7 @@ public class HookActions : MonoBehaviour
             for (int i = 0; i < revokeSpeed; i++) {
                 Rigidbody2D temp = ropes[ropes.Count - 1 - i];
                 ropes.RemoveAt(ropes.Count - 1 - i);
+                ropesJoint.RemoveAt(ropesJoint.Count - 1 - i);
                 Destroy(temp.gameObject);
             }
         } else
@@ -141,6 +145,7 @@ public class HookActions : MonoBehaviour
             {
                 Rigidbody2D temp = ropes[i];
                 ropes.RemoveAt(i);
+                ropesJoint.RemoveAt(i);
                 Destroy(temp.gameObject);
             }
             Destroy(gameObject);
@@ -150,7 +155,31 @@ public class HookActions : MonoBehaviour
 
     private void pullRopes()
     {
-
+        float distance = Vector2.Distance(transform.position, interaction.Player.transform.position);
+        Rigidbody2D temp;
+        interaction.PlayerRig.AddForce((transform.position - interaction.Player.transform.position) / Vector2.Distance(transform.position, interaction.Player.transform.position) * pullForce);
+        for (int i = ropes.Count - 1; i > distance; i--) {
+            temp = ropes[i];
+            ropes.RemoveAt(i);
+            ropesJoint.RemoveAt(i);
+            hookLineRen.positionCount--;
+            Destroy(temp.gameObject);
+        }
+        temp = ropes[0];
+        for (int i = 0; i < ropes.Count; i++)
+        {
+            ropes[i].transform.position = Vector3.Lerp(ropes[i].transform.position, Vector3.Lerp(transform.position, interaction.Player.transform.position, (float)i / ropes.Count), 0.5f);
+            if (i == 0)
+            {
+                ropesJoint[i].connectedBody = hookRig;
+            } else
+            {
+                ropesJoint[i].connectedBody = temp;
+                temp = ropes[i];
+            }
+        }
+        interaction.PlayerJoint.connectedBody = ropes[ropes.Count - 1];
+        updateLineRenPos();
     }
 
     private Vector2 travelDirection()   //return an unit vecter2 in the direction the hook should travel with its rotation

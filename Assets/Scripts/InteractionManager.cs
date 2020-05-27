@@ -8,6 +8,7 @@ public class InteractionManager : MonoBehaviour
     public bool isHookRevoking = true;  //state indicate if the hook is revoking and revoked
     public bool isHookStoped = true;
     public bool isHookPulling = false;
+    public bool isJumped = false;
 
     private Vector3 initialPos;
 
@@ -18,6 +19,10 @@ public class InteractionManager : MonoBehaviour
     [SerializeField]
     private HingeJoint2D playerJoint;
     public HingeJoint2D PlayerJoint { get { return playerJoint; } } //Property to player's HingeJoint component
+
+    [SerializeField]
+    private Rigidbody2D playerRig;
+    public Rigidbody2D PlayerRig { get { return playerRig; } }
 
     [SerializeField]
     private GameObject hookPrefabs;
