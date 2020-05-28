@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour
 
    public void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex == 5)
+        if (scene.buildIndex == (int)GameManager.scene.TitleScene)
         {
             GameObject.FindWithTag("TutLevelButton").GetComponent<Button>().onClick.AddListener(loadTutLevel);
             GameObject.FindWithTag("LevelOneButton").GetComponent<Button>().onClick.AddListener(loadLevelOne);
