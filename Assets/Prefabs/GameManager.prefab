@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6479753127604876454}
   - component: {fileID: 6479753127604876455}
   - component: {fileID: 3983803507747534694}
+  - component: {fileID: 1496495963}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -48,8 +49,11 @@ MonoBehaviour:
   isHooked: 0
   isHookRevoking: 1
   isHookStoped: 1
+  isHookPulling: 0
+  isJumped: 0
   player: {fileID: 0}
   playerJoint: {fileID: 0}
+  playerRig: {fileID: 0}
   hookPrefabs: {fileID: 3573981322378805277, guid: 71b06d8d9311a9f4f97eb388c7e4aa01,
     type: 3}
   ropePrefabs: {fileID: 3306777324326805534, guid: 7b59771ac56f26b4ab88ffb8b7a0cfb3,
@@ -82,3 +86,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e313e4302fa0c94db934cad7d65eee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 0}
+  interaction: {fileID: 6479753127604876454}
+--- !u!114 &1496495963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479753127604876448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49cb376b85eea34b894c4cf1990c4eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RespawnPoints:
+  - {x: -55, y: -5}
+  - {x: 75, y: -5}
+  - {x: 120, y: 38}
+  interaction: {fileID: 6479753127604876454}
+  FallPositionY:
+  - -25
+  - -25
+  - -25
