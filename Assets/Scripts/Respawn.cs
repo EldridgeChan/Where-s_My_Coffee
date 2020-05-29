@@ -10,9 +10,9 @@ public class Respawn : MonoBehaviour
     public Vector2[] RespawnPoints;
 
     [SerializeField]
-    private InteractionManager interaction;
-    [SerializeField]
     private float[] FallPositionY;
+    [SerializeField]
+    private InteractionManager interaction;
 
 
     // Start is called before the first frame update
