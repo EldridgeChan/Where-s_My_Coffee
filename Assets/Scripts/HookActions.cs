@@ -76,6 +76,15 @@ public class HookActions : MonoBehaviour
         updateLineRenPos();
     }
 
+    public void deleteRope()
+    {
+        for (int i = ropes.Count - 1; i >= 0; i--)
+        {
+            Destroy(ropes[i].gameObject);
+        }
+        Destroy(gameObject);
+    }
+
     private void travel()   //make hook move
     {
         hookRig.velocity = travelDir * hookSpeed;
@@ -151,6 +160,7 @@ public class HookActions : MonoBehaviour
                 ropesJoint.RemoveAt(i);
                 Destroy(temp.gameObject);
             }
+            interaction.isHookStoped = true;
             Destroy(gameObject);
         }
         updateLineRenPos();
