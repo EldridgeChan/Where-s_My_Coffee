@@ -10,6 +10,7 @@ public class InteractionManager : MonoBehaviour
     public bool isHookPulling = false;
     public bool isJumped = false;
     public bool isHookTraveling = false;
+    public bool isWin = false;
 
     [SerializeField]
     private GameObject player; 

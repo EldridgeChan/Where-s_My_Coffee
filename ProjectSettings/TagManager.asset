@@ -15,6 +15,7 @@ TagManager:
   - TitleSceneButton
   - UnHookable
   - Traps
+  - Goal
   layers:
   - Default
   - TransparentFX
