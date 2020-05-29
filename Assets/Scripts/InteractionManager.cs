@@ -10,8 +10,6 @@ public class InteractionManager : MonoBehaviour
     public bool isHookPulling = false;
     public bool isJumped = false;
 
-    private Vector3 initialPos;
-
     [SerializeField]
     private GameObject player; 
     public GameObject Player{ get{return player;} } //Property to player gameobject
@@ -39,20 +37,13 @@ public class InteractionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initialPos = Player.transform.position;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        respawn();
+
     }
 
-    private void respawn()
-    {
-        /*if (Player.transform.position.y < -20)
-        {
-            Player.transform.position = initialPos;
-        }*/
-    }
 }
