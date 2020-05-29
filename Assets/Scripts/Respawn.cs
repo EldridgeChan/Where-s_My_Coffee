@@ -26,6 +26,9 @@ public class Respawn : MonoBehaviour
     {
         fallOffMap();
     }
+
+    //trigger death of the character
+    //Also called by Movement when collied wilth trap
     public void characterDie()
     {
         if (interaction.Inputman.currHook != null)
