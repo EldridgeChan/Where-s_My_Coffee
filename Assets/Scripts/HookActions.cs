@@ -46,7 +46,10 @@ public class HookActions : MonoBehaviour
             {
                 attachPlayer();
             }
-        }
+        }/* else if (collision.gameObject.tag == "UnHookable")
+        {
+
+        }*/
     }
 
     private void FixedUpdate()

@@ -7,6 +7,13 @@ TagManager:
   - Platform
   - GameManager
   - Rope
+  - TutLevelButton
+  - LevelOneButton
+  - LevelTwoButton
+  - LevelThreeButton
+  - LevelFourButton
+  - TitleSceneButton
+  - UnHookable
   layers:
   - Default
   - TransparentFX
