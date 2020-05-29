@@ -9,6 +9,7 @@ public class InteractionManager : MonoBehaviour
     public bool isHookStoped = true;
     public bool isHookPulling = false;
     public bool isJumped = false;
+    public bool isHookTraveling = false;
 
     [SerializeField]
     private GameObject player; 

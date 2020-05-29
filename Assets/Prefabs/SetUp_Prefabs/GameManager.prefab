@@ -104,8 +104,8 @@ MonoBehaviour:
   - {x: -55, y: -5}
   - {x: 75, y: -5}
   - {x: 120, y: 38}
-  interaction: {fileID: 6479753127604876454}
   FallPositionY:
   - -25
   - -25
   - -25
+  interaction: {fileID: 6479753127604876454}
