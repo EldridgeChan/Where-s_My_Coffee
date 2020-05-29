@@ -51,6 +51,7 @@ MonoBehaviour:
   isHookStoped: 1
   isHookPulling: 0
   isJumped: 0
+  isHookTraveling: 0
   player: {fileID: 0}
   playerJoint: {fileID: 0}
   playerRig: {fileID: 0}
@@ -59,6 +60,7 @@ MonoBehaviour:
   ropePrefabs: {fileID: 3306777324326805534, guid: 7b59771ac56f26b4ab88ffb8b7a0cfb3,
     type: 3}
   inputMan: {fileID: 6479753127604876455}
+  respawnScript: {fileID: 1496495963}
 --- !u!114 &6479753127604876455
 MonoBehaviour:
   m_ObjectHideFlags: 0
