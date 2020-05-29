@@ -34,6 +34,7 @@ public class Respawn : MonoBehaviour
         }
         interaction.isHooked = false;
         interaction.isHookStoped = true;
+        interaction.PlayerRig.velocity = Vector3.zero;
         interaction.Player.transform.position = RespawnPoints[SpawnPointNum];
     }
     public void updateCheckPoint()

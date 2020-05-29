@@ -21,8 +21,7 @@ public class Movement : MonoBehaviour
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
-    [SerializeField]
-    private SpriteRenderer playerSpriteRen; //SpriteRenderer of main character
+
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
