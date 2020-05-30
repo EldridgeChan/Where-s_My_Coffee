@@ -120,7 +120,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: -0.04, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,8 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interaction: {fileID: 0}
-  animator: {fileID: 6734823589441772128}
-  playerSpriteRen: {fileID: 6734823589441772130}
 --- !u!233 &6734823589441772134
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -218,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6734823590331191284}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -0.13, z: 0}
+  m_LocalPosition: {x: -0.05, y: -0.16, z: 0}
   m_LocalScale: {x: 0.3929212, y: 0.3929212, z: 0.3929212}
   m_Children: []
   m_Father: {fileID: 6734823589441772129}
