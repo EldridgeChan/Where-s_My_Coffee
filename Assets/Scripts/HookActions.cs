@@ -13,10 +13,10 @@ public class HookActions : MonoBehaviour
     private HingeJoint2D hookJoint;  //The HingeJont of Hook object
     private Rigidbody2D lastRopeRig;  //The rigidbody of the last rope segment object
     private Rigidbody2D hookRig;  //the irgidbocy of the Hook object
-    private List<Rigidbody2D> ropes = new List<Rigidbody2D>();  // a list to store all the rope segment
-    private List<HingeJoint2D> ropesJoint = new List<HingeJoint2D>();
     private InteractionManager interaction;   //interaction manager
     private LineRenderer hookLineRen;
+    private List<HingeJoint2D> ropesJoint = new List<HingeJoint2D>();
+    private List<Rigidbody2D> ropes = new List<Rigidbody2D>();  // a list to store all the rope segment
 
     private void Awake()
     {
