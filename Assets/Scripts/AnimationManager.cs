@@ -50,6 +50,7 @@ public class AnimationManager : MonoBehaviour
                 playerSpriteRen.flipY = false;
             }
             interaction.PlayerRig.rotation = zRotationToHook();
+            onGround.transform.eulerAngles = Vector3.zero;
         } else
         {
             if (playerSpriteRen.flipY)
@@ -65,6 +66,7 @@ public class AnimationManager : MonoBehaviour
                 playerSpriteRen.flipX = false;
             }
             interaction.PlayerRig.rotation = 0f;
+            onGround.transform.eulerAngles = Vector3.zero;
         }
     }
 
