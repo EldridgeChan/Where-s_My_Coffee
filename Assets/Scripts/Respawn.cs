@@ -47,7 +47,7 @@ public class Respawn : MonoBehaviour
 
     private void fallOffMap()
     {
-        if (RespawnPoints.Length > 0 && interaction.Player.transform.position.y < FallPositionY[SpawnPointNum])
+        if (RespawnPoints.Length > 0 && interaction.Player.transform.position.y < FallPositionY[SpawnPointNum] && !interaction.isWin)
         {
             characterDie();
         }
