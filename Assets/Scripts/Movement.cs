@@ -21,8 +21,7 @@ public class Movement : MonoBehaviour
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
-    [SerializeField]
-    private SpriteRenderer playerSpriteRen; //SpriteRenderer of main character
+
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -34,6 +33,14 @@ public class Movement : MonoBehaviour
     void Start()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!interaction.isWin && collision.tag == "Traps")
+        {
+            interaction.RespawnScript.characterDie();
+        }
     }
 
     private void FixedUpdate()

@@ -13,10 +13,10 @@ public class HookActions : MonoBehaviour
     private HingeJoint2D hookJoint;  //The HingeJont of Hook object
     private Rigidbody2D lastRopeRig;  //The rigidbody of the last rope segment object
     private Rigidbody2D hookRig;  //the irgidbocy of the Hook object
-    private List<Rigidbody2D> ropes = new List<Rigidbody2D>();  // a list to store all the rope segment
-    private List<HingeJoint2D> ropesJoint = new List<HingeJoint2D>();
     private InteractionManager interaction;   //interaction manager
     private LineRenderer hookLineRen;
+    private List<HingeJoint2D> ropesJoint = new List<HingeJoint2D>();
+    private List<Rigidbody2D> ropes = new List<Rigidbody2D>();  // a list to store all the rope segment
 
     private void Awake()
     {
@@ -44,12 +44,15 @@ public class HookActions : MonoBehaviour
             hookJoint.connectedBody = collision.GetComponent<Rigidbody2D>();    //get the hook attach to the platform
             if (ropes.Count == 0)
             {
-                attachPlayer();
+                buildropes();
             }
-        }/* else if (collision.gameObject.tag == "UnHookable")
-        {
-
-        }*/
+                attachPlayer();
+            int dis = Mathf.FloorToInt(Vector2.Distance(lastRopeRig.transform.position, interaction.Player.transform.position));
+            for (int i = 0; i < dis; i++ )
+            {
+                pullRopes();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -61,12 +64,15 @@ public class HookActions : MonoBehaviour
         {
             pullRopes();
         }
-        else if (Vector2.Distance(transform.position, interaction.Player.transform.position) < maxRopes && !interaction.isHookStoped)
+        else if (Vector2.Distance(transform.position, interaction.Player.transform.position) < maxRopes && !interaction.isHookStoped && interaction.isHookTraveling)
         {   //the hook before revoke
             travel();
         } else if (ropes.Count == 0)
         {
-            attachPlayer();
+            buildropes();
+        } else if (!interaction.isHooked)
+        {
+            ropes[ropes.Count - 1].MovePosition(interaction.Player.transform.position);
         }
     }
 
@@ -90,7 +96,7 @@ public class HookActions : MonoBehaviour
         hookRig.velocity = travelDir * hookSpeed;
     }
 
-    private void attachPlayer()
+    private void buildropes()
     {
         interaction.isHookStoped = true;
         hookRig.velocity = Vector2.zero;
@@ -108,6 +114,10 @@ public class HookActions : MonoBehaviour
             hookLineRen.positionCount++;
             hookLineRen.SetPosition(hookLineRen.positionCount - 2, ropes[ropes.Count - 1].transform.position);
         }
+    }
+
+    private void attachPlayer()
+    {
         interaction.PlayerJoint.enabled = true; //activate player's joint coponent
         interaction.PlayerJoint.connectedBody = lastRopeRig;    //attach the player to the last rope segment
     }

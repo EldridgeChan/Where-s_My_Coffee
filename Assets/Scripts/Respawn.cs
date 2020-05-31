@@ -26,6 +26,9 @@ public class Respawn : MonoBehaviour
     {
         fallOffMap();
     }
+
+    //trigger death of the character
+    //Also called by Movement when collied wilth trap
     public void characterDie()
     {
         if (interaction.Inputman.currHook != null)
@@ -34,6 +37,7 @@ public class Respawn : MonoBehaviour
         }
         interaction.isHooked = false;
         interaction.isHookStoped = true;
+        interaction.PlayerRig.velocity = Vector3.zero;
         interaction.Player.transform.position = RespawnPoints[SpawnPointNum];
     }
     public void updateCheckPoint()
@@ -43,7 +47,7 @@ public class Respawn : MonoBehaviour
 
     private void fallOffMap()
     {
-        if (RespawnPoints.Length > 0 && interaction.Player.transform.position.y < FallPositionY[SpawnPointNum])
+        if (RespawnPoints.Length > 0 && interaction.Player.transform.position.y < FallPositionY[SpawnPointNum] && !interaction.isWin)
         {
             characterDie();
         }
