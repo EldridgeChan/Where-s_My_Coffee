@@ -3515,6 +3515,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4999803083703785632, guid: ed85e5f63bdff2e42b91f9090e25ed8c,
+        type: 3}
+      propertyPath: m_TagString
+      value: TitleSceneButton
+      objectReference: {fileID: 0}
     - target: {fileID: 4999803084356569320, guid: ed85e5f63bdff2e42b91f9090e25ed8c,
         type: 3}
       propertyPath: m_Name

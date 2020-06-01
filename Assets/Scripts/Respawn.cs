@@ -40,6 +40,7 @@ public class Respawn : MonoBehaviour
         }
         interaction.isHooked = false;
         interaction.isHookStoped = true;
+        interaction.isHookPulling = false;
         interaction.PlayerRig.velocity = Vector3.zero;
         interaction.Player.transform.position = new Vector2(RespawnPoints[SpawnPointNum].x, RespawnPoints[SpawnPointNum].y + respawnHight);
         interaction.Inputman.enabled = false;
