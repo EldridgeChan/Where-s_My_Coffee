@@ -36,7 +36,7 @@ public class AnimationManager : MonoBehaviour
         playerAnimator.SetBool("OnGround", onGround.IsGrounded);
         playerAnimator.SetBool("isJumped", interaction.isJumped);
 
-        if (interaction.isHooked && !onGround.IsGrounded)
+        if (interaction.isHooked && !onGround.IsGrounded && !interaction.isWin)
         {
             if (playerSpriteRen.flipX)
             {

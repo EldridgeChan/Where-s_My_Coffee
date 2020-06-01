@@ -34,44 +34,88 @@ public class SceneController : MonoBehaviour
         if (scene.buildIndex == (int)GameManager.scene.TitleScene)
         {
             GameObject.FindWithTag("TutLevelButton").GetComponent<Button>().onClick.AddListener(loadTutLevel);
+            GameObject.FindWithTag("LevelSelectButton").GetComponent<Button>().onClick.AddListener(loadLevelSelectScene);
+            GameObject.FindWithTag("QuitButton").GetComponent<Button>().onClick.AddListener(quitGame);
+
+        } else if (scene.buildIndex == (int)GameManager.scene.LevelSelect)
+        {
             GameObject.FindWithTag("LevelOneButton").GetComponent<Button>().onClick.AddListener(loadLevelOne);
             GameObject.FindWithTag("LevelTwoButton").GetComponent<Button>().onClick.AddListener(loadLevelTwo);
             GameObject.FindWithTag("LevelThreeButton").GetComponent<Button>().onClick.AddListener(loadLevelThree);
             GameObject.FindWithTag("LevelFourButton").GetComponent<Button>().onClick.AddListener(loadLevelFour);
-        } else
+            GameObject.FindWithTag("TitleSceneButton").GetComponent<Button>().onClick.AddListener(loadTitleScene);
+        }
+        else if (scene.buildIndex == (int)GameManager.scene.tutLevel)
         {
             GameObject.FindWithTag("TitleSceneButton").GetComponent<Button>().onClick.AddListener(loadTitleScene);
+        } else
+        {
+            GameObject.FindWithTag("LevelSelectButton").GetComponent<Button>().onClick.AddListener(loadLevelSelectScene);
         }
     }
 
     public void loadTitleScene()
     {
-        SceneManager.LoadScene((int)GameManager.scene.TitleScene);
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.TitleScene;
+        SceneManager.LoadScene((int)GameManager.currScene);
+    }
+
+    public void loadLevelSelectScene()
+    {
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.LevelSelect;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadTutLevel()
     {
-        SceneManager.LoadScene((int)GameManager.scene.tutLevel);
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.tutLevel;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelOne()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelOne);
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.levelOne;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelTwo()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelTwo);
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.levelTwo;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelThree()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelThree);
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.levelThree;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelFour()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelFour);
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.levelFour;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
+    public void quitGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    private void loadNextLevel()
+    {
+        GameManager.currScene = (GameManager.scene)(((int)GameManager.currScene + 1) % 7);
+        SceneManager.LoadScene((int)GameManager.currScene);
+    }
+
+    public void loadAfterWin(float time)
+    {
+        Invoke("loadNextLevel", time);
+    }
 }
