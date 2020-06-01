@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
+    [SerializeField]
+    private float respawnHight;
+
     private int spawnPointNum = 0;
     public int SpawnPointNum { get { return spawnPointNum; } }
 
@@ -38,7 +41,9 @@ public class Respawn : MonoBehaviour
         interaction.isHooked = false;
         interaction.isHookStoped = true;
         interaction.PlayerRig.velocity = Vector3.zero;
-        interaction.Player.transform.position = RespawnPoints[SpawnPointNum];
+        interaction.Player.transform.position = new Vector2(RespawnPoints[SpawnPointNum].x, RespawnPoints[SpawnPointNum].y + respawnHight);
+        interaction.Inputman.enabled = false;
+        interaction.Inputman.setZero();
     }
     public void updateCheckPoint()
     {

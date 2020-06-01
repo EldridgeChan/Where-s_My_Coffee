@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class OnGround : MonoBehaviour
 {
+    private InteractionManager interaction;
+
     private bool isGrounded = false;  //a bool to indicate if the character is on ground
     public bool IsGrounded
     {
         get { return isGrounded; }
+    }
+
+    private void Awake()
+    {
+        interaction = GameObject.FindWithTag("GameManager").GetComponent<InteractionManager>();
     }
 
     // Start is called before the first frame update
@@ -29,6 +36,10 @@ public class OnGround : MonoBehaviour
         if (collision.gameObject.tag == "Platform" || collision.gameObject.tag == "UnHookable")
         {
             isGrounded = true;
+            if (!interaction.Inputman.enabled)
+            {
+                interaction.Inputman.enabled = true;
+            }
         }
     }
 
