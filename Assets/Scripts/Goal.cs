@@ -27,8 +27,10 @@ public class Goal : MonoBehaviour
             interaction.isWin = true;
             interaction.Inputman.enabled = false;
             interaction.RespawnScript.enabled = false;
+            interaction.Player.GetComponent<BoxCollider2D>().enabled = false;
             float distance = interaction.Player.transform.position.x - transform.position.x;
             flyOffDir = new Vector2(distance / Mathf.Abs(distance), 0.3f);
+            GameObject.FindWithTag("SceneController").GetComponent<SceneController>().loadAfterWin(3f);
         }
     }
 
