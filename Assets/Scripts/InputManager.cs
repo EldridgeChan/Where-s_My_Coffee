@@ -23,9 +23,11 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        control = Input.GetAxisRaw("Horizontal");
-        throwHook();    //Check mouse input
-        jump();
+        if (!interaction.isWin) {
+            control = Input.GetAxisRaw("Horizontal");
+            throwHook();    //Check mouse input
+            jump();
+        }
 
     }
 

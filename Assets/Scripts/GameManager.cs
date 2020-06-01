@@ -10,6 +10,7 @@ public class GameManager
     public enum scene
     {
         TitleScene,
+        LevelSelect,
         tutLevel,
         levelOne,
         levelTwo,
