@@ -29,6 +29,11 @@ public class InputManager : MonoBehaviour
 
     }
 
+    public void setZero()
+    {
+        control = 0;
+    }
+
     private void throwHook()
     {
         if (Input.GetMouseButtonDown(0))    //When left click pressed

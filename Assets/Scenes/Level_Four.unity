@@ -342,7 +342,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8112281582004322427, guid: a2de0da49d5ef0b46a4637493ecf87c9,
-
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
@@ -5154,6 +5153,10 @@ PrefabInstance:
     - target: {fileID: 1496495963, guid: 4d1125984846cdf439384133d244d8a0, type: 3}
       propertyPath: FallPositionY.Array.data[3]
       value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1496495963, guid: 4d1125984846cdf439384133d244d8a0, type: 3}
+      propertyPath: respawnHight
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3983803507747534694, guid: 4d1125984846cdf439384133d244d8a0,
         type: 3}
