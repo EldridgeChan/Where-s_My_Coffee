@@ -5,10 +5,12 @@ using UnityEngine;
 public class GameManager
 {
     static public bool firstLoad = true;
+    static public scene currScene = scene.TitleScene;
 
     public enum scene
     {
         TitleScene,
+        LevelSelect,
         tutLevel,
         levelOne,
         levelTwo,
