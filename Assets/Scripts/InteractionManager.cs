@@ -7,8 +7,10 @@ public class InteractionManager : MonoBehaviour
     public bool isHooked = false;   //state indicate if the hook is hooked to the platform
     public bool isHookRevoking = true;  //state indicate if the hook is revoking and revoked
     public bool isHookStoped = true;
-
-    private Vector3 initialPos;
+    public bool isHookPulling = false;
+    public bool isJumped = false;
+    public bool isHookTraveling = false;
+    public bool isWin = false;
 
     [SerializeField]
     private GameObject player; 
@@ -17,6 +19,10 @@ public class InteractionManager : MonoBehaviour
     [SerializeField]
     private HingeJoint2D playerJoint;
     public HingeJoint2D PlayerJoint { get { return playerJoint; } } //Property to player's HingeJoint component
+
+    [SerializeField]
+    private Rigidbody2D playerRig;
+    public Rigidbody2D PlayerRig { get { return playerRig; } }
 
     [SerializeField]
     private GameObject hookPrefabs;
@@ -30,23 +36,20 @@ public class InteractionManager : MonoBehaviour
     private InputManager inputMan;
     public InputManager Inputman { get { return inputMan; } }   //Property to inputManager script
 
+    [SerializeField]
+    private Respawn respawnScript;
+    public Respawn RespawnScript { get { return respawnScript; } }
+
     // Start is called before the first frame update
     void Start()
     {
-        initialPos = Player.transform.position;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        respawn();
+
     }
 
-    private void respawn()
-    {
-        if (Player.transform.position.y < -20)
-        {
-            Player.transform.position = initialPos;
-        }
-    }
 }
