@@ -46,32 +46,48 @@ public class SceneController : MonoBehaviour
 
     public void loadTitleScene()
     {
-        SceneManager.LoadScene((int)GameManager.scene.TitleScene);
+        GameManager.currScene = GameManager.scene.TitleScene;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadTutLevel()
     {
-        SceneManager.LoadScene((int)GameManager.scene.tutLevel);
+        GameManager.currScene = GameManager.scene.tutLevel;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelOne()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelOne);
+        GameManager.currScene = GameManager.scene.levelOne;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelTwo()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelTwo);
+        GameManager.currScene = GameManager.scene.levelTwo;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelThree()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelThree);
+        GameManager.currScene = GameManager.scene.levelThree;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
     public void loadLevelFour()
     {
-        SceneManager.LoadScene((int)GameManager.scene.levelFour);
+        GameManager.currScene = GameManager.scene.levelFour;
+        SceneManager.LoadScene((int)GameManager.currScene);
     }
 
+    private void loadNextLevel()
+    {
+        GameManager.currScene = (GameManager.scene)(((int)GameManager.currScene + 1) % 6);
+        SceneManager.LoadScene((int)GameManager.currScene);
+    }
+
+    public void loadAfterWin(float time)
+    {
+        Invoke("loadNextLevel", time);
+    }
 }

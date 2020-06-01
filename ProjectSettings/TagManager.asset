@@ -16,6 +16,7 @@ TagManager:
   - UnHookable
   - Traps
   - Goal
+  - SceneController
   layers:
   - Default
   - TransparentFX
