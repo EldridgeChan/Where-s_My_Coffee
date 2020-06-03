@@ -16,6 +16,9 @@ TagManager:
   - UnHookable
   - Traps
   - Goal
+  - SceneController
+  - QuitButton
+  - LevelSelectButton
   layers:
   - Default
   - TransparentFX
