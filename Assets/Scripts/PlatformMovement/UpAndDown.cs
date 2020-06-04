@@ -11,16 +11,19 @@ public class UpAndDown : MonoBehaviour
 
     private float originalPositionY;
     private bool goBack = false;
+    public Rigidbody2D rb;
+
     void Start()
     {
+        rb = GameObject.Find("SpikePlatform").GetComponent<Rigidbody2D>();
         originalPositionY = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(transform.position.y);
-        print(originalPositionY - movementDistance);
+        //print(transform.position.y);
+        //print(originalPositionY - movementDistance);
         if (transform.position.y < originalPositionY + movementDistance && goBack == false)
         {
             goBack = false;
@@ -39,5 +42,22 @@ public class UpAndDown : MonoBehaviour
 
 
 
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        print(other.transform.tag);
+        if (other.transform.tag == "Player")
+        {
+            other.transform.parent = transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            other.transform.parent = null;
+        }
     }
 }
