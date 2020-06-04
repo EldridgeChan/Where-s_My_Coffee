@@ -11,8 +11,15 @@ public class LeftAndRight : MonoBehaviour
 
     private float originalPositionX;
     private bool goBack = false;
+    public Rigidbody2D rb;
+
+    //public GameObject gameObject;
     void Start()
     {
+        rb = GameObject.Find("SpikePlatform").GetComponent<Rigidbody2D>();
+        //rb.isKinematic = true;
+
+        //player = FindObjectOfType<GameObject>();
         originalPositionX = transform.position.x;
     }
 
@@ -24,6 +31,7 @@ public class LeftAndRight : MonoBehaviour
         {
             goBack = false;
             transform.Translate(Vector3.left * speed * Time.deltaTime);
+            //rb.MovePosition((transform.position + Vector3.left) * speed * Time.fixedDeltaTime);
         }
         else
         {
@@ -39,4 +47,22 @@ public class LeftAndRight : MonoBehaviour
 
 
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        print(other.transform.tag);
+        if (other.transform.tag == "Player")
+        {
+            other.transform.parent = transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            other.transform.parent = null;
+        }
+    }
+
 }

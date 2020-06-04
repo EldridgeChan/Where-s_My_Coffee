@@ -1193,6 +1193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   movementDistance: 50
+  rb: {fileID: 0}
 --- !u!114 &570962799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2228,7 +2229,7 @@ GameObject:
   - component: {fileID: 1189848801}
   m_Layer: 0
   m_Name: Platform_UpAndDown
-  m_TagString: Platform
+  m_TagString: UnHookable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2378,6 +2379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   movementDistance: 25
+  rb: {fileID: 0}
 --- !u!1001 &1258060294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4036,12 +4038,12 @@ PrefabInstance:
     - target: {fileID: 1961582257402899740, guid: 5020193eb9e2db548b945df0a1b28ac3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.58
+      value: 0.565
       objectReference: {fileID: 0}
     - target: {fileID: 1961582257402899740, guid: 5020193eb9e2db548b945df0a1b28ac3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.63
+      value: 0.615
       objectReference: {fileID: 0}
     - target: {fileID: 1961582258493908609, guid: 5020193eb9e2db548b945df0a1b28ac3,
         type: 3}
@@ -4056,12 +4058,27 @@ PrefabInstance:
     - target: {fileID: 1961582258661135218, guid: 5020193eb9e2db548b945df0a1b28ac3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7339532
+      value: 0.732
       objectReference: {fileID: 0}
     - target: {fileID: 1961582258661135218, guid: 5020193eb9e2db548b945df0a1b28ac3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.65535164
+      value: 0.599
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758696884811042817, guid: 5020193eb9e2db548b945df0a1b28ac3,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5ba7b0872db3e074eb35d628cf577b5c, type: 2}
+    - target: {fileID: 7758696884811042817, guid: 5020193eb9e2db548b945df0a1b28ac3,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758696884811042817, guid: 5020193eb9e2db548b945df0a1b28ac3,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7758696884811042818, guid: 5020193eb9e2db548b945df0a1b28ac3,
         type: 3}
@@ -4128,10 +4145,20 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 15.804697
       objectReference: {fileID: 0}
+    - target: {fileID: 7758696884811042846, guid: 5020193eb9e2db548b945df0a1b28ac3,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5ba7b0872db3e074eb35d628cf577b5c, type: 2}
     - target: {fileID: 7758696884811042847, guid: 5020193eb9e2db548b945df0a1b28ac3,
         type: 3}
       propertyPath: m_Name
-      value: Spike Platform
+      value: SpikePlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758696884811042847, guid: 5020193eb9e2db548b945df0a1b28ac3,
+        type: 3}
+      propertyPath: m_TagString
+      value: UnHookable
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7758696884811042818, guid: 5020193eb9e2db548b945df0a1b28ac3, type: 3}
