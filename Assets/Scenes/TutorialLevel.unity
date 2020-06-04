@@ -1975,11 +1975,31 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1645443306}
+    - target: {fileID: 2402752411720182579, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
+        type: 3}
+      propertyPath: verticalParallaxEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402752411720182579, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
+        type: 3}
+      propertyPath: horizentalParallaxEffect
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2402752411849531858, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
         type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 1645443306}
+    - target: {fileID: 2402752411849531858, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
+        type: 3}
+      propertyPath: verticalParallaxEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402752411849531858, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
+        type: 3}
+      propertyPath: horizentalParallaxEffect
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2402752412590268760, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
         type: 3}
       propertyPath: m_Name
