@@ -27,7 +27,10 @@ public class OnGround : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform" || collision.gameObject.tag == "UnHookable")
         {
-            isGrounded = false;
+            if (!interaction.isJumped)
+            {
+                Invoke("jump", 0.2f);
+            }
         }
     }
 
