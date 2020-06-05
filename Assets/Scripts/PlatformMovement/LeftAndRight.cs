@@ -50,7 +50,7 @@ public class LeftAndRight : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        print(other.transform.tag);
+        //print(other.transform.tag);
         if (other.transform.tag == "Player")
         {
             other.transform.parent = transform;
