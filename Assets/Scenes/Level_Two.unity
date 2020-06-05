@@ -1263,7 +1263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1496495963, guid: 4d1125984846cdf439384133d244d8a0, type: 3}
       propertyPath: FallPositionY.Array.data[0]
-      value: -70
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 1496495963, guid: 4d1125984846cdf439384133d244d8a0, type: 3}
       propertyPath: RespawnPoints.Array.data[1].x
@@ -1275,7 +1275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1496495963, guid: 4d1125984846cdf439384133d244d8a0, type: 3}
       propertyPath: FallPositionY.Array.data[1]
-      value: -70
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 3983803507747534694, guid: 4d1125984846cdf439384133d244d8a0,
         type: 3}
@@ -3264,7 +3264,17 @@ PrefabInstance:
     - target: {fileID: 2402752411849531869, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402752411849531869, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402752411849531869, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2402752411988476250, guid: e5122ed9cd8e3db4b9d3f81941f97a1e,
         type: 3}
