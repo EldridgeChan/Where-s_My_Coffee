@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
             if (currHook == null)   //If no hook already thorwn
             {
                 interaction.isHookTraveling = true;
-                interaction.isHookRevoking = false;
+                InteractionManager.isHookRevoking = false;
                 interaction.isHookStoped = false;
                 //Creat a new Hook gameObject
                 currHook = Instantiate(interaction.HookPrefabs, interaction.Player.transform.position + Vector3.up, Quaternion.FromToRotation(Vector2.up, Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10) - interaction.Player.transform.position)).GetComponent<HookActions>();
@@ -51,7 +51,7 @@ public class InputManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))  //When left click released
         {
-            interaction.isHookRevoking = true;  //change state
+            InteractionManager.isHookRevoking = true;  //change state
             interaction.isHookTraveling = false;
         }
         if (Input.GetMouseButtonDown(1))

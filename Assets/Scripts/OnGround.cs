@@ -5,6 +5,7 @@ using UnityEngine;
 public class OnGround : MonoBehaviour
 {
     private InteractionManager interaction;
+    private Movement movementScript;
 
     private bool isGrounded = false;  //a bool to indicate if the character is on ground
     public bool IsGrounded
@@ -14,6 +15,7 @@ public class OnGround : MonoBehaviour
 
     private void Awake()
     {
+        movementScript = GetComponentInParent<Movement>();
         interaction = GameObject.FindWithTag("GameManager").GetComponent<InteractionManager>();
     }
 
@@ -27,7 +29,10 @@ public class OnGround : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform" || collision.gameObject.tag == "UnHookable")
         {
-            isGrounded = false;
+            if (!interaction.isJumped)
+            {
+                Invoke("jump", movementScript.OffEdgeBuffer);
+            }
         }
     }
 
@@ -36,6 +41,10 @@ public class OnGround : MonoBehaviour
         if (collision.gameObject.tag == "Platform" || collision.gameObject.tag == "UnHookable")
         {
             isGrounded = true;
+            if (interaction.missedJump)
+            {
+                movementScript.jump();
+            }
             if (!interaction.Inputman.enabled)
             {
                 interaction.Inputman.enabled = true;
