@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HookActions : MonoBehaviour
 {
-    const float pullForce = 1200f;
+    const float pullForce = 1000f;
     const float hookSpeed = 150f;  //How fast the hook flying off from the character
     const int maxRopes = 20;   //How long the rope can be
     const int revokeSpeed = 2;
