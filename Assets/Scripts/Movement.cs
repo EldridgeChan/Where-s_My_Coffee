@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     //above value affect jumping
 
     private Rigidbody2D rig;  //character's rigidbody
-    private OnGround onGround; //On ground collider scrips 
+    public OnGround onGround; //On ground collider scrips 
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager

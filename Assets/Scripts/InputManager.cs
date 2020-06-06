@@ -68,6 +68,11 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            if (interaction.isHookPulling && playersMovement.onGround.IsGrounded && InteractionManager.isHooked && currHook.transform.position.y < playersMovement.transform.position.y)
+            {
+                InteractionManager.isHookRevoking = true;
+                interaction.isHookTraveling = false;
+            }
             playersMovement.jump();
         }
     }
