@@ -32,11 +32,11 @@ public class AnimationManager : MonoBehaviour
     private void characterAnimation()
     {
         playerAnimator.SetFloat("Speed", Mathf.Abs(interaction.Inputman.Control));
-        playerAnimator.SetBool("isHooked", interaction.isHooked);
+        playerAnimator.SetBool("isHooked", InteractionManager.isHooked);
         playerAnimator.SetBool("OnGround", onGround.IsGrounded);
         playerAnimator.SetBool("isJumped", interaction.isJumped);
 
-        if (interaction.isHooked && !onGround.IsGrounded && !interaction.isWin)
+        if (InteractionManager.isHooked && !onGround.IsGrounded && !interaction.isWin)
         {
             if (playerSpriteRen.flipX)
             {

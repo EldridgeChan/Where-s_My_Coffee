@@ -38,7 +38,8 @@ public class Respawn : MonoBehaviour
         {
             interaction.Inputman.currHook.deleteRope();
         }
-        interaction.isHooked = false;
+        InteractionManager.isHooked = false;
+        InteractionManager.wraped = false;
         interaction.isHookStoped = true;
         interaction.isHookPulling = false;
         interaction.PlayerRig.velocity = Vector3.zero;
