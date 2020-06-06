@@ -49,11 +49,7 @@ public class HookActions : MonoBehaviour
                 buildropes();
             }
             attachPlayer();
-            int dis = (int)Vector2.Distance(lastRopeRig.transform.position, interaction.Player.transform.position);
-            for (int i = 1; i < dis; i++)
-            {
-                pullRopes();
-            }
+            pullRopes();
         }
     }
 
