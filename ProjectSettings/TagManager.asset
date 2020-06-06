@@ -19,6 +19,7 @@ TagManager:
   - SceneController
   - QuitButton
   - LevelSelectButton
+  - HookPoint
   layers:
   - Default
   - TransparentFX

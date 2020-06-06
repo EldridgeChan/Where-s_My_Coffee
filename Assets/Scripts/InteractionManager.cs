@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
-    public bool isHooked = false;   //state indicate if the hook is hooked to the platform
-    public bool isHookRevoking = true;  //state indicate if the hook is revoking and revoked
     public bool isHookStoped = true;
     public bool isHookPulling = false;
     public bool isJumped = false;
     public bool isHookTraveling = false;
     public bool isWin = false;
+    public bool missedJump = false;
+
+    static public bool isHookRevoking = true;  //state indicate if the hook is revoking and revoked
+    static public bool isHooked = false;   //state indicate if the hook is hooked to the platform
+    static public bool wraped = false;
 
     [SerializeField]
     private GameObject player; 
