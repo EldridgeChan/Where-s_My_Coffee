@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 190640772}
   m_Layer: 0
   m_Name: HookPoint
-  m_TagString: Platform
+  m_TagString: HookPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
