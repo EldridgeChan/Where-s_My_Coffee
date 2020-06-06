@@ -8,6 +8,7 @@ public class HookActions : MonoBehaviour
     const float hookSpeed = 150f;  //How fast the hook flying off from the character
     const int maxRopes = 20;   //How long the rope can be
     const int revokeSpeed = 2;
+    const float releaseVelocity = 65f;
     //Values above control the hook
     private Vector2 travelDir;  //A variable to store what direction should the hook travel
     private HingeJoint2D hookJoint;  //The HingeJont of Hook object
@@ -93,7 +94,8 @@ public class HookActions : MonoBehaviour
 
     private void travel()   //make hook move
     {
-        hookRig.velocity = travelDir * hookSpeed;
+        //hookRig.velocity = travelDir * hookSpeed;
+        hookRig.velocity = (travelDir * hookSpeed) + interaction.PlayerRig.velocity;
     }
 
     private void buildropes()
@@ -110,10 +112,12 @@ public class HookActions : MonoBehaviour
             ropes.Add(currRopeRig = Instantiate(interaction.RopePrefabs, nextRopePosition(i, ropeSegs), Quaternion.identity).GetComponent<Rigidbody2D>());
             ropesJoint.Add(currRopeRig.GetComponent<HingeJoint2D>());
             ropesJoint[ropesJoint.Count - 1].connectedBody = lastRopeRig;   //attach the rope to the previout rope or hook
+            currRopeRig.velocity = interaction.PlayerRig.velocity;
             lastRopeRig = currRopeRig;
             hookLineRen.positionCount++;
             hookLineRen.SetPosition(hookLineRen.positionCount - 2, ropes[ropes.Count - 1].transform.position);
         }
+        hookRig.velocity = interaction.PlayerRig.velocity;
     }
 
     private void attachPlayer()
@@ -136,12 +140,16 @@ public class HookActions : MonoBehaviour
     {
         if (interaction.isHookStoped || interaction.isHooked)
         {
-            interaction.isHooked = false;
-            interaction.isHookStoped = false;
-            hookJoint.connectedBody = null;
-            hookJoint.enabled = false;
             interaction.PlayerJoint.connectedBody = null;
             interaction.PlayerJoint.enabled = false;
+            hookJoint.connectedBody = null;
+            hookJoint.enabled = false;
+            if (interaction.isHooked && transform.position.y > interaction.Player.transform.position.y)
+            {
+                interaction.PlayerRig.velocity = new Vector2(minReleaseSpeed(), interaction.PlayerRig.velocity.y);
+            }
+            interaction.isHooked = false;
+            interaction.isHookStoped = false;
         }
 
         for (int i = 0; i < ropes.Count; i++)
@@ -176,9 +184,20 @@ public class HookActions : MonoBehaviour
         updateLineRenPos();
     }
 
+    private float minReleaseSpeed()
+    {
+        if (Mathf.Abs(interaction.PlayerRig.velocity.x) > releaseVelocity)
+        {
+            return interaction.PlayerRig.velocity.x;
+        } else
+        {
+            return interaction.Inputman.Control * releaseVelocity;
+        }
+    }
+
     private void pullRopes()
     {
-        float distance = Vector2.Distance(transform.position, interaction.Player.transform.position);
+        float distance = Vector2.Distance(transform.position, interaction.PlayerRig.position);
         Rigidbody2D temp;
         interaction.PlayerRig.AddForce((transform.position - interaction.Player.transform.position) / Vector2.Distance(transform.position, interaction.Player.transform.position) * pullForce);
         for (int i = ropes.Count - 1; i > distance; i--) {
@@ -191,7 +210,7 @@ public class HookActions : MonoBehaviour
         temp = ropes[0];
         for (int i = 0; i < ropes.Count; i++)
         {
-            ropes[i].transform.position = Vector3.Lerp(ropes[i].transform.position, Vector3.Lerp(transform.position, interaction.Player.transform.position, (float)i / ropes.Count), 0.5f);
+            ropes[i].position = Vector3.Lerp(ropes[i].transform.position, Vector3.Lerp(transform.position, interaction.Player.transform.position, (float)i / ropes.Count), 0.5f);
             if (i == 0)
             {
                 ropesJoint[i].connectedBody = hookRig;

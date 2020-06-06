@@ -81,6 +81,7 @@ public class Movement : MonoBehaviour
         if (onGround.IsGrounded) {
             onGround.jump();
             interaction.isJumped = true;
+            rig.velocity = new Vector2(rig.velocity.x, 0f);
             rig.AddForce(Vector2.up * jumpForce);    //add force upward
         }
     }
