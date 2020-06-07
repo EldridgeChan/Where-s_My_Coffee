@@ -46,18 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b634d5bda052a4782eadaf03d55c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHooked: 0
-  isHookRevoking: 1
   isHookStoped: 1
   isHookPulling: 0
   isJumped: 0
   isHookTraveling: 0
+  isWin: 0
+  missedJump: 0
   player: {fileID: 0}
   playerJoint: {fileID: 0}
   playerRig: {fileID: 0}
   hookPrefabs: {fileID: 3573981322378805277, guid: 71b06d8d9311a9f4f97eb388c7e4aa01,
     type: 3}
   ropePrefabs: {fileID: 3306777324326805534, guid: 7b59771ac56f26b4ab88ffb8b7a0cfb3,
+    type: 3}
+  bloodPrefab: {fileID: 2620467716581472229, guid: fc6ec29c06cb8d943a4296b3432863ab,
     type: 3}
   inputMan: {fileID: 6479753127604876455}
   respawnScript: {fileID: 1496495963}
@@ -102,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49cb376b85eea34b894c4cf1990c4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnHight: 0
   RespawnPoints:
   - {x: -55, y: -5}
   - {x: 75, y: -5}

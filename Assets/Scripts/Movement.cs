@@ -42,6 +42,7 @@ public class Movement : MonoBehaviour
     {
         if (!interaction.isWin && collision.tag == "Traps")
         {
+            Destroy(Instantiate(interaction.BloodPrefab, collision.transform.position + Vector3.up * 1f, Quaternion.identity), 2f);
             interaction.RespawnScript.characterDie();
         }
     }
