@@ -12,12 +12,15 @@ public class SceneController : MonoBehaviour
         if (!GameManager.firstLoad)
         {
             Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-        for (int i = 0; i < GameManager.times.Length; i++)
+        } else
         {
-            GameManager.times[i] = "No result";
+            for (int i = 0; i < GameManager.times.Length; i++)
+            {
+                GameManager.times[i] = "No result";
+            }
+            DontDestroyOnLoad(gameObject);
         }
+
     }
 
     // Start is called before the first frame update
@@ -39,6 +42,7 @@ public class SceneController : MonoBehaviour
         {
             GameObject.FindWithTag("TutLevelButton").GetComponent<Button>().onClick.AddListener(loadTutLevel);
             GameObject.FindWithTag("LevelSelectButton").GetComponent<Button>().onClick.AddListener(loadLevelSelectScene);
+            GameObject.FindWithTag("ResultScene").GetComponent<Button>().onClick.AddListener(loadResultScene);
             GameObject.FindWithTag("QuitButton").GetComponent<Button>().onClick.AddListener(quitGame);
 
         } else if (scene.buildIndex == (int)GameManager.scene.LevelSelect)
@@ -107,7 +111,14 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene((int)GameManager.currScene);
     }
 
-    public void quitGame()
+    public void loadResultScene()
+    {
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.finishScene;
+        SceneManager.LoadScene((int)GameManager.currScene);
+    }
+
+        public void quitGame()
     {
 #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
         Debug.Log(this.name + " : " + this.GetType() + " : " + System.Reflection.MethodBase.GetCurrentMethod().Name);
