@@ -6,6 +6,7 @@ public class GameManager
 {
     static public bool firstLoad = true;
     static public scene currScene = scene.TitleScene;
+    static public string[] times = new string[5];
 
     public enum scene
     {
