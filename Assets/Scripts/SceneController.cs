@@ -49,7 +49,7 @@ public class SceneController : MonoBehaviour
             GameObject.FindWithTag("LevelFourButton").GetComponent<Button>().onClick.AddListener(loadLevelFour);
             GameObject.FindWithTag("TitleSceneButton").GetComponent<Button>().onClick.AddListener(loadTitleScene);
         }
-        else if (scene.buildIndex == (int)GameManager.scene.tutLevel)
+        else if (scene.buildIndex == (int)GameManager.scene.tutLevel || scene.buildIndex == (int)GameManager.scene.finishScene)
         {
             GameObject.FindWithTag("TitleSceneButton").GetComponent<Button>().onClick.AddListener(loadTitleScene);
         } else
@@ -123,7 +123,7 @@ public class SceneController : MonoBehaviour
 
     private void loadNextLevel()
     {
-        GameManager.currScene = (GameManager.scene)(((int)GameManager.currScene + 1) % 7);
+        GameManager.currScene = (GameManager.scene)(((int)GameManager.currScene + 1) % 8);
         SceneManager.LoadScene((int)GameManager.currScene);
     }
 
