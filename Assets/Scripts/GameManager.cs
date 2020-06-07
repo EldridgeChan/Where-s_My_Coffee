@@ -16,7 +16,8 @@ public class GameManager
         levelOne,
         levelTwo,
         levelThree,
-        levelFour
+        levelFour,
+        finishScene
     }
 
 
