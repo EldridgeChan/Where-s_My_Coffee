@@ -13,7 +13,11 @@ public class SceneController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);    
+        DontDestroyOnLoad(gameObject);
+        for (int i = 0; i < GameManager.times.Length; i++)
+        {
+            GameManager.times[i] = "No result";
+        }
     }
 
     // Start is called before the first frame update

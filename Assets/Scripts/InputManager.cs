@@ -11,8 +11,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField]
     private InteractionManager interaction; //interaction manager script
-    [SerializeField]
-    private Movement playersMovement;
+    public Movement playersMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +67,11 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            if (interaction.isHookPulling && playersMovement.onGround.IsGrounded && InteractionManager.isHooked && currHook.transform.position.y < playersMovement.transform.position.y)
+            {
+                InteractionManager.isHookRevoking = true;
+                interaction.isHookTraveling = false;
+            }
             playersMovement.jump();
         }
     }

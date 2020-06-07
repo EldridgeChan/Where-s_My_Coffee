@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     //above value affect jumping
 
     private Rigidbody2D rig;  //character's rigidbody
-    private OnGround onGround; //On ground collider scrips 
+    public OnGround onGround; //On ground collider scrips 
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
@@ -42,6 +42,7 @@ public class Movement : MonoBehaviour
     {
         if (!interaction.isWin && collision.tag == "Traps")
         {
+            Destroy(Instantiate(interaction.BloodPrefab, collision.transform.position + Vector3.up * 1f, Quaternion.identity), 2f);
             interaction.RespawnScript.characterDie();
         }
     }
