@@ -12,12 +12,15 @@ public class SceneController : MonoBehaviour
         if (!GameManager.firstLoad)
         {
             Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-        for (int i = 0; i < GameManager.times.Length; i++)
+        } else
         {
-            GameManager.times[i] = "No result";
+            for (int i = 0; i < GameManager.times.Length; i++)
+            {
+                GameManager.times[i] = "No result";
+            }
+            DontDestroyOnLoad(gameObject);
         }
+
     }
 
     // Start is called before the first frame update
