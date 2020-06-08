@@ -40,6 +40,10 @@ public class InteractionManager : MonoBehaviour
     public GameObject BloodPrefab { get { return bloodPrefab; } }
 
     [SerializeField]
+    private PhysicsMaterial2D noFriction;
+    public PhysicsMaterial2D NoFriction { get { return noFriction; } }
+
+    [SerializeField]
     private InputManager inputMan;
     public InputManager Inputman { get { return inputMan; } }   //Property to inputManager script
 

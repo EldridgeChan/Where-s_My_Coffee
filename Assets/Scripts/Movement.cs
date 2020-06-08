@@ -65,6 +65,7 @@ public class Movement : MonoBehaviour
     {
         if (interaction.Inputman.Control != 0)
         {
+            interaction.PlayerRig.sharedMaterial = interaction.NoFriction;
             if (Mathf.Abs(rig.velocity.x) <= maxSpeed)
             {
                 rig.velocity += Vector2.right * Mathf.Clamp((interaction.Inputman.Control * maxSpeed) - rig.velocity.x, -acceleration, acceleration);
@@ -78,6 +79,7 @@ public class Movement : MonoBehaviour
             }
         } else if (!InteractionManager.isHooked)
         {
+            interaction.PlayerRig.sharedMaterial = null;
             rig.velocity += Vector2.right * Mathf.Clamp(-rig.velocity.x , -stopDeceleration, stopDeceleration);
         }
     }

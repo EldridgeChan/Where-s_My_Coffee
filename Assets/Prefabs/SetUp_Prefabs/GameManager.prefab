@@ -61,6 +61,7 @@ MonoBehaviour:
     type: 3}
   bloodPrefab: {fileID: 2620467716581472229, guid: fc6ec29c06cb8d943a4296b3432863ab,
     type: 3}
+  noFriction: {fileID: 6200000, guid: 5ba7b0872db3e074eb35d628cf577b5c, type: 2}
   inputMan: {fileID: 6479753127604876455}
   respawnScript: {fileID: 1496495963}
 --- !u!114 &6479753127604876455
