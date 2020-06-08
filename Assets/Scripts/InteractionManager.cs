@@ -36,12 +36,17 @@ public class InteractionManager : MonoBehaviour
     public GameObject RopePrefabs { get { return ropePrefabs; } }   //Property to RopePreFabs
 
     [SerializeField]
+    private GameObject bloodPrefab;
+    public GameObject BloodPrefab { get { return bloodPrefab; } }
+
+    [SerializeField]
     private InputManager inputMan;
     public InputManager Inputman { get { return inputMan; } }   //Property to inputManager script
 
     [SerializeField]
     private Respawn respawnScript;
     public Respawn RespawnScript { get { return respawnScript; } }
+
 
     // Start is called before the first frame update
     void Start()

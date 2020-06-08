@@ -30,7 +30,8 @@ public class Goal : MonoBehaviour
             interaction.Player.GetComponent<BoxCollider2D>().enabled = false;
             float distance = interaction.Player.transform.position.x - transform.position.x;
             flyOffDir = new Vector2(distance / Mathf.Abs(distance), 0.3f);
-            GameObject.FindWithTag("SceneController").GetComponent<SceneController>().loadAfterWin(3f);
+            GameObject.FindWithTag("Timer").GetComponent<TimeCounter>().win();
+            GameObject.FindWithTag("SceneController").GetComponent<SceneController>().loadAfterWin(5f);
         }
     }
 

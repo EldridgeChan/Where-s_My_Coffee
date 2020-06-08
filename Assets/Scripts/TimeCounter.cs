@@ -10,11 +10,13 @@ public class TimeCounter : MonoBehaviour
     [SerializeField]
     private Text timeText;
 
+    private RectTransform timerTransform;
     private InteractionManager interaction;
 
     private void Awake()
     {
         interaction = GameObject.FindWithTag("GameManager").GetComponent<InteractionManager>();
+        timerTransform = GetComponent<RectTransform>();
     }
 
     // Start is called before the first frame update
@@ -32,6 +34,18 @@ public class TimeCounter : MonoBehaviour
             updateTime();
         }
         
+    }
+
+    public void win()
+    {
+        string time = timeText.text;
+        timeText.text = "Congratulations!! \n" + "Your time is " + time;
+        timeText.fontSize = 72;
+        timerTransform.sizeDelta = new Vector2(900f, 600f);
+        timerTransform.localPosition = Vector2.zero;
+        if (GameManager.currScene != GameManager.scene.tutLevel) {
+            GameManager.times[(int)GameManager.currScene - 3] = time;
+        }
     }
 
     private void updateTime()
