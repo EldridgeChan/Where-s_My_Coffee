@@ -20,7 +20,8 @@ public class Movement : MonoBehaviour
     //above value affect jumping
 
     private Rigidbody2D rig;  //character's rigidbody
-    private OnGround onGround; //On ground collider scrips 
+    private AudioSource jumpSound;
+    public OnGround onGround; //On ground collider scrips 
 
     [SerializeField]
     private InteractionManager interaction;  //interaction manager
@@ -29,6 +30,7 @@ public class Movement : MonoBehaviour
     {
         rig = GetComponent<Rigidbody2D>();
         onGround = GetComponentInChildren<OnGround>();
+        jumpSound = GetComponent<AudioSource>();
     }
 
 
@@ -42,6 +44,7 @@ public class Movement : MonoBehaviour
     {
         if (!interaction.isWin && collision.tag == "Traps")
         {
+            Destroy(Instantiate(interaction.BloodPrefab, collision.transform.position + Vector3.up * 1f, Quaternion.identity), 2f);
             interaction.RespawnScript.characterDie();
         }
     }
@@ -84,6 +87,7 @@ public class Movement : MonoBehaviour
         if (onGround.IsGrounded) {
             onGround.jump();
             interaction.isJumped = true;
+            jumpSound.Play();
             rig.velocity = new Vector2(rig.velocity.x, 0f);
             rig.AddForce(Vector2.up * jumpForce);    //add force upward
         } else

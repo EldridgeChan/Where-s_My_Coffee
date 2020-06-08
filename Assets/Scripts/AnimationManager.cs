@@ -49,7 +49,9 @@ public class AnimationManager : MonoBehaviour
             {
                 playerSpriteRen.flipY = false;
             }
-            interaction.PlayerRig.rotation = zRotationToHook();
+            if (interaction.Inputman.currHook != null) {
+                interaction.PlayerRig.rotation = zRotationToHook();
+            }
             onGround.transform.eulerAngles = Vector3.zero;
         } else
         {

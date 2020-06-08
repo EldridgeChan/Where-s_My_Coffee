@@ -12,8 +12,15 @@ public class SceneController : MonoBehaviour
         if (!GameManager.firstLoad)
         {
             Destroy(gameObject);
+        } else
+        {
+            for (int i = 0; i < GameManager.times.Length; i++)
+            {
+                GameManager.times[i] = "No result";
+            }
+            DontDestroyOnLoad(gameObject);
         }
-        DontDestroyOnLoad(gameObject);    
+
     }
 
     // Start is called before the first frame update
@@ -35,6 +42,7 @@ public class SceneController : MonoBehaviour
         {
             GameObject.FindWithTag("TutLevelButton").GetComponent<Button>().onClick.AddListener(loadTutLevel);
             GameObject.FindWithTag("LevelSelectButton").GetComponent<Button>().onClick.AddListener(loadLevelSelectScene);
+            GameObject.FindWithTag("ResultScene").GetComponent<Button>().onClick.AddListener(loadResultScene);
             GameObject.FindWithTag("QuitButton").GetComponent<Button>().onClick.AddListener(quitGame);
 
         } else if (scene.buildIndex == (int)GameManager.scene.LevelSelect)
@@ -45,7 +53,7 @@ public class SceneController : MonoBehaviour
             GameObject.FindWithTag("LevelFourButton").GetComponent<Button>().onClick.AddListener(loadLevelFour);
             GameObject.FindWithTag("TitleSceneButton").GetComponent<Button>().onClick.AddListener(loadTitleScene);
         }
-        else if (scene.buildIndex == (int)GameManager.scene.tutLevel)
+        else if (scene.buildIndex == (int)GameManager.scene.tutLevel || scene.buildIndex == (int)GameManager.scene.finishScene)
         {
             GameObject.FindWithTag("TitleSceneButton").GetComponent<Button>().onClick.AddListener(loadTitleScene);
         } else
@@ -103,7 +111,14 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene((int)GameManager.currScene);
     }
 
-    public void quitGame()
+    public void loadResultScene()
+    {
+        CancelInvoke();
+        GameManager.currScene = GameManager.scene.finishScene;
+        SceneManager.LoadScene((int)GameManager.currScene);
+    }
+
+        public void quitGame()
     {
 #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
         Debug.Log(this.name + " : " + this.GetType() + " : " + System.Reflection.MethodBase.GetCurrentMethod().Name);
@@ -119,7 +134,7 @@ public class SceneController : MonoBehaviour
 
     private void loadNextLevel()
     {
-        GameManager.currScene = (GameManager.scene)(((int)GameManager.currScene + 1) % 7);
+        GameManager.currScene = (GameManager.scene)(((int)GameManager.currScene + 1) % 8);
         SceneManager.LoadScene((int)GameManager.currScene);
     }
 

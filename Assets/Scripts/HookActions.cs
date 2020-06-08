@@ -50,6 +50,10 @@ public class HookActions : MonoBehaviour
             }
             attachPlayer();
             pullRopes();
+        } else if (collision.tag == "Player" && interaction.isHookPulling && InteractionManager.isHooked && interaction.Inputman.playersMovement.onGround.IsGrounded)
+        {
+            InteractionManager.isHookRevoking = true;
+            interaction.isHookTraveling = false;
         }
     }
 
