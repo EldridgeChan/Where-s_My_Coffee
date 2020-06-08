@@ -43,7 +43,9 @@ public class TimeCounter : MonoBehaviour
         timeText.fontSize = 72;
         timerTransform.sizeDelta = new Vector2(900f, 600f);
         timerTransform.localPosition = Vector2.zero;
-        GameManager.times[(int)GameManager.currScene - 2] = time;
+        if (GameManager.currScene != GameManager.scene.tutLevel) {
+            GameManager.times[(int)GameManager.currScene - 3] = time;
+        }
     }
 
     private void updateTime()
