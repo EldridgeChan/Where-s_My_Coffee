@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3573981322378805274}
   - component: {fileID: -8637194019104523969}
   - component: {fileID: -1448463170472795921}
-  - component: {fileID: 931313328}
   - component: {fileID: 3832031338440966015}
+  - component: {fileID: -4165706450551318768}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
@@ -241,22 +241,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!70 &931313328
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3573981322378805277}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
-  m_Size: {x: 2, y: 3}
-  m_Direction: 0
 --- !u!82 &3832031338440966015
 AudioSource:
   m_ObjectHideFlags: 0
@@ -353,3 +337,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &-4165706450551318768
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3573981322378805277}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  serializedVersion: 2
+  m_Radius: 1.5
