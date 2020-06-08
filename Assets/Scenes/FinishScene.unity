@@ -805,7 +805,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Tut Level : \nLevel 1 : \nLevel 2 : \nLevel 3 : \nLevel 4 : "
+  m_Text: "Level 1 : \nLevel 2 : \nLevel 3 : \nLevel 4 : "
 --- !u!222 &1658834508
 CanvasRenderer:
   m_ObjectHideFlags: 0
